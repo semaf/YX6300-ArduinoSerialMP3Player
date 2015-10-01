@@ -10,14 +10,13 @@
 
 // Uncomment SoftwareSerial for Arduino Uno or Nano.  
 
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 
-//#define ARDUINO_RX 5  //should connect to TX of the Serial MP3 Player module
-//#define ARDUINO_TX 6  //connect to RX of the module
+#define ARDUINO_RX 5  //should connect to TX of the Serial MP3 Player module
+#define ARDUINO_TX 6  //connect to RX of the module
 
-//SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
-
-#define mp3 Serial3    // Connect the MP3 Serial Player to the Arduino MEGA Serial3 (14 TX3 -> RX, 15 RX3 -> TX)
+SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
+//#define mp3 Serial3    // Connect the MP3 Serial Player to the Arduino MEGA Serial3 (14 TX3 -> RX, 15 RX3 -> TX)
 
 static int8_t Send_buf[8] = {0}; // Buffer for Send commands.  // BETTER LOCALLY
 static uint8_t ansbuf[10] = {0}; // Buffer for the answers.    // BETTER LOCALLY
@@ -67,13 +66,13 @@ boolean playing = false;    // Sending 'p' the module switch to Play to Pause or
 
 void setup() 
 {
-	Serial.begin(9600);
-	mp3.begin(9600);
-	delay(500);
+  Serial.begin(9600);
+  mp3.begin(9600);
+  delay(500);
                                           
         sendCommand(CMD_SEL_DEV, DEV_TF);  
-	delay(200);
-//	sendCommand(CMD_PLAY_W_VOL, 0X0F28); // Playing a 15 (0x0F) Vol the song num 40 (0x28). 
+  delay(200);
+//  sendCommand(CMD_PLAY_W_VOL, 0X0F28); // Playing a 15 (0x0F) Vol the song num 40 (0x28). 
 }
 
 
@@ -98,7 +97,7 @@ void loop()
 
  
 /********************************************************************************/
-/*Function sendMP3Command: seek for a 'c' command and send it to MP3 	*/
+/*Function sendMP3Command: seek for a 'c' command and send it to MP3  */
 /*Parameter: c. Code for the MP3 Command, 'h' for help.                                                                                                         */
 /*Return:  void                                                                */
 
@@ -118,7 +117,7 @@ void sendMP3Command(char c){
       case 'p':
           if(!playing){
             Serial.println("Play ");
-       	    //sendCommand(CMD_PLAY_W_VOL, 0X0F01);//play the first song with volume 15 class
+            //sendCommand(CMD_PLAY_W_VOL, 0X0F01);//play the first song with volume 15 class
             sendCommand(CMD_PLAY, 0);
             playing = true;
           }else{
@@ -158,7 +157,7 @@ void sendMP3Command(char c){
 
  
 /********************************************************************************/
-/*Function decodeMP3Answer: Decode MP3 answer. 	                                */
+/*Function decodeMP3Answer: Decode MP3 answer.                                  */
 /*Parameter:-void                                                               */
 /*Return: The                                                  */
 
@@ -199,7 +198,7 @@ String decodeMP3Answer(){
 
 
 /********************************************************************************/
-/*Function: Send command to the MP3	                                        */
+/*Function: Send command to the MP3                                         */
 /*Parameter:-int8_t command                                                     */
 /*Parameter:-int16_ dat  parameter for the command                              */
 
@@ -224,7 +223,7 @@ void sendCommand(int8_t command, int16_t dat)
 
 
 /********************************************************************************/
-/*Function: sbyte2hex. Returns a byte data in HEX format.	                */
+/*Function: sbyte2hex. Returns a byte data in HEX format.                 */
 /*Parameter:- uint8_t b. Byte to convert to HEX.                                */
 /*Return: String                                                                */
 
@@ -249,7 +248,7 @@ String sbyte2hex(uint8_t b)
 
 
 /********************************************************************************/
-/*Function: sanswer. Returns a String answer from mp3 UART module.	        */
+/*Function: sanswer. Returns a String answer from mp3 UART module.          */
 /*Parameter:- uint8_t b. void.                                                  */
 /*Return: String. If the answer is well formated answer.                        */
 
@@ -281,11 +280,3 @@ String sbyte2hex(uint8_t b)
   //return false;
   return "???: "+mp3answer;
 }
- 
- 
- 
- 
- 
-
-
-
