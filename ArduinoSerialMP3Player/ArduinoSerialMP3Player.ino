@@ -72,6 +72,7 @@ void setup()
   delay(500);
 
   sendCommand(CMD_SEL_DEV, DEV_TF);
+  delay(500);
 }
 
 
@@ -116,11 +117,11 @@ void sendMP3Command(char c) {
       Serial.println(" v = Query volume");
       Serial.println(" x = Query folder count");
       Serial.println(" t = Query total file count");
-      Serial.println(" 0 = Query folder file count 0");
-      Serial.println(" 1 = Query folder file count 1");
-      Serial.println(" 2 = Query folder file count 2");
-      Serial.println(" 3 = Query folder file count 3");
-      Serial.println(" 4 = Query folder file count 4");
+      Serial.println(" 1 = Play folder 1");
+      Serial.println(" 2 = Play folder 2");
+      Serial.println(" 3 = Play folder 3");
+      Serial.println(" 4 = Play folder 4");
+      Serial.println(" 5 = Play folder 5");
       Serial.println(" S = Sleep");
       Serial.println(" W = Wake up");
       Serial.println(" r = Reset");
@@ -187,29 +188,29 @@ void sendMP3Command(char c) {
       sendCommand(CMD_QUERY_TOT_TRACKS, 0);
       break;
 
-    case '0':
-      Serial.println("Query folder file count 0");
-      sendCommand(CMD_QUERY_FLDR_TRACKS, 0x00);
-      break;
-
     case '1':
-      Serial.println("Query folder file count 1");
-      sendCommand(CMD_QUERY_FLDR_TRACKS, 0x01);
+      Serial.println("Play folder 1");
+      sendCommand(CMD_FOLDER_CYCLE, 0x0101);
       break;
 
     case '2':
-      Serial.println("Query folder file count 2");
-      sendCommand(CMD_QUERY_FLDR_TRACKS, 0x02);
+      Serial.println("Play folder 2");
+      sendCommand(CMD_FOLDER_CYCLE, 0x0201);
       break;
 
     case '3':
-      Serial.println("Query folder file count 3");
-      sendCommand(CMD_QUERY_FLDR_TRACKS, 0x03);
+      Serial.println("Play folder 3");
+      sendCommand(CMD_FOLDER_CYCLE, 0x0301);
       break;
 
     case '4':
-      Serial.println("Query folder file count 4");
-      sendCommand(CMD_QUERY_FLDR_TRACKS, 0x04);
+      Serial.println("Play folder 4");
+      sendCommand(CMD_FOLDER_CYCLE, 0x0401);
+      break;
+
+    case '5':
+      Serial.println("Play folder 5");
+      sendCommand(CMD_FOLDER_CYCLE, 0x0501);
       break;
 
     case 'S':
@@ -225,12 +226,6 @@ void sendMP3Command(char c) {
     case 'r':
       Serial.println("Reset");
       sendCommand(CMD_RESET, 0x00);
-      break;
-
-    case 'a':
-      Serial.println("Toggle auto resume");
-      autoResume = !autoResume;
-      Serial.println(autoResume);
       break;
   }
 }
@@ -254,9 +249,6 @@ String decodeMP3Answer() {
 
     case 0x3D:
       decodedMP3Answer += " -> Completed play num " + String(ansbuf[6], DEC);
-      if(autoResume) {
-        sendCommand(CMD_PLAY, 0);
-      }
       break;
 
     case 0x40:
