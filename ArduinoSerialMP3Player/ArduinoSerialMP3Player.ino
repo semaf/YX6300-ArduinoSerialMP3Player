@@ -23,8 +23,6 @@ static uint8_t ansbuf[10] = {0}; // Buffer for the answers.    // BETTER LOCALLY
 
 String mp3Answer;           // Answer from the MP3.
 
-boolean autoResume = true;
-
 /************ Command byte **************************/
 #define CMD_NEXT_SONG     0X01  // Play next song.
 #define CMD_PREV_SONG     0X02  // Play previous song.
@@ -125,7 +123,6 @@ void sendMP3Command(char c) {
       Serial.println(" S = Sleep");
       Serial.println(" W = Wake up");
       Serial.println(" r = Reset");
-      Serial.println(" a = Toggle auto resume");
       break;
 
 
