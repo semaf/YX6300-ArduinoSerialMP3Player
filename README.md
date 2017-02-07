@@ -7,7 +7,7 @@ Buy the MP3 module on http://www.dx.com/p/uart-control-serial-mp3-music-player-m
 Documentation and some Arduino code examples:
 
 (Spanish)
-http://joanruedapauweb.com/blog/index.php/2017/02/06/arduino-mp3-player-yx5300-es/
+http://joanruedapauweb.com/blog/index.php/2017/02/07/arduino-serial-mp3-player-yx5300-es/
 
 (Chinese)(Catalex_YX5300_Docs.zip files)
 http://pan.baidu.com/s/1hqilpB2
