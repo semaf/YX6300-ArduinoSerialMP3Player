@@ -125,7 +125,6 @@ void sendMP3Command(char c) {
       Serial.println(" S = Sleep");
       Serial.println(" W = Wake up");
       Serial.println(" r = Reset");
-      Serial.println(" a = Toggle auto resume");
       break;
 
 
@@ -139,13 +138,11 @@ void sendMP3Command(char c) {
       sendCommand(CMD_PAUSE, 0);
       break;
 
-
     case '>':
       Serial.println("Next");
       sendCommand(CMD_NEXT_SONG, 0);
       sendCommand(CMD_PLAYING_N, 0x0000); // ask for the number of file is playing
       break;
-
 
     case '<':
       Serial.println("Previous");
@@ -167,7 +164,7 @@ void sendMP3Command(char c) {
       Serial.println("Query current file");
       sendCommand(CMD_PLAYING_N, 0);
       break;
-      
+
     case 'q':
       Serial.println("Query status");
       sendCommand(CMD_QUERY_STATUS, 0);
