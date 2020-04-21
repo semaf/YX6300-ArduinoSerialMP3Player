@@ -1,8 +1,7 @@
 # ArduinoSerialMP3Player
 Playing MP3 files on a Serial MP3 Player board from Catalex (YX5300 chip)
 
-Buy the MP3 module on http://www.dx.com/p/uart-control-serial-mp3-music-player-module-for-arduino-avr-arm-pic-blue-silver-342439#.VfHyobPh5z0
-
+Buy the MP3 module on https://electronics.semaf.at/YX6300-MP3-Audio-Player-Modul-Seriell-mit-microSD-Eingang
 
 Documentation and some Arduino code examples:
 
